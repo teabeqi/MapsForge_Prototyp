@@ -2,8 +2,18 @@ package com.example.user.mapsforge;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Environment;
+import org.mapsforge.core.model.LatLong;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
+import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.android.view.MapView;
+import org.mapsforge.map.datastore.MapDataStore;
+import org.mapsforge.map.layer.cache.TileCache;
+import org.mapsforge.map.layer.renderer.TileRendererLayer;
+import org.mapsforge.map.reader.MapFile;
+import org.mapsforge.map.rendertheme.InternalRenderTheme;
+
+import java.io.File;
 
 
 public class MainActivity extends Activity {
@@ -23,5 +33,26 @@ public class MainActivity extends Activity {
         // Karte auf den Activity anzeigen
         setContentView(this.mapView);
 
+        // ein tile cache von anpassendes Größe erstellen
+        TileCache tileCache = AndroidUtil.createTileCache(this, "mapcache",
+                mapView.getModel().displayModel.getTileSize(), 1f,
+                this.mapView.getModel().frameBufferModel.getOverdrawFactor());
+
+        // tile renderer layer vewwendet internal render theme
+        // data pfad sehen und kontrollieren
+        MapDataStore mapDataStore = new MapFile(new File(Environment.getExternalStorageDirectory(), MAP_FILE));
+
+        TileRendererLayer tileRendererLayer = new TileRendererLayer(tileCache, mapDataStore,
+                this.mapView.getModel().mapViewPosition, AndroidGraphicFactory.INSTANCE);
+        tileRendererLayer.setXmlRenderTheme(InternalRenderTheme.DEFAULT);
+
+        // only once a layer is associated with a mapView the rendering starts
+        this.mapView.getLayerManager().getLayers().add(tileRendererLayer);
+
+        //Koords von Theth
+        this.mapView.setCenter(new LatLong(42.39561, 19.77352));
+        this.mapView.setZoomLevel((byte) 17);
+
     }
 }
+
