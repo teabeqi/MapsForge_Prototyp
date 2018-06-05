@@ -32,6 +32,12 @@ public class MainActivity extends Activity {
         this.mapView = new MapView(this);
         // Karte auf den Activity anzeigen
         setContentView(this.mapView);
+        // was man mit der Karte machen kann
+        this.mapView.setClickable(true);
+        this.mapView.getMapScaleBar().setVisible(true);
+        this.mapView.setBuiltInZoomControls(true);
+        this.mapView.setZoomLevelMin((byte) 10);
+        this.mapView.setZoomLevelMax((byte) 20);
 
         // ein tile cache von anpassendes Größe erstellen
         TileCache tileCache = AndroidUtil.createTileCache(this, "mapcache",
