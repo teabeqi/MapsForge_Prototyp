@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.example.mapsforge.views.RotateView
+        android:id="@+id/rotateView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <org.mapsforge.map.android.view.MapView
+            android:id="@+id/mapView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+    </com.example.mapsforge.views.RotateView>
+
+    <LinearLayout
+        android:id="@+id/zoom_controls"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        android:padding="10dp"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/attribution"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="1dp"
+        android:gravity="center"
+        android:singleLine="true"
+        android:visibility="gone"
+        android:text="Map data © OpenStreetMap contributors"
+        android:textColor="#000"
+        android:textSize="4pt" />
+
+    <com.example.mapsforge.views.MapScaleBarView
+        android:id="@+id/mapScaleBarView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="5dp" />
+
+</RelativeLayout>
